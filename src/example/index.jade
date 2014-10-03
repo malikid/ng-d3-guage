@@ -1,0 +1,14 @@
+html
+head
+  title
+  meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+  link(rel='stylesheet', href='dist/d3Guage.css')
+  script(src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.js', type='text/javascript', charset='utf-8')
+  script(src="lib/d3/d3.js")
+  script(src='dist/d3Guage.js')
+  script(src='dist/needleFactory.js')
+  script(src='dist/guageService.js')
+  script(src='main.js')
+
+body(ng-app='demo', ng-controller='demoCtrl')
+  d3-guage(guage-option="guageOption")
