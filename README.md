@@ -6,15 +6,22 @@ d3 guage bower package.
 
 ###Usage
 
-1. Bower install.
+- Bower install.
 ```
 bower install ng-d3-guage
 ```
-2. Set the directive anywhere you want.
+
+- Set the directive anywhere you want.
 ```
-ng-d3-guage(guage-option="guageOption")
+d3-guage(guage-option="guageOption")
 ```
-3. Set the option in your controller.
+
+- Import module to your app module.
+```
+angular.module("demo", ["d3Guage"])
+```
+
+- Set the option in your controller.
 ```
 $scope.guageOption =
   startPercent: .75
@@ -39,8 +46,10 @@ $scope.guageOption =
     }
   ]
 ```
-4. Set the css.
-5. Done!
+
+- Set the css.
+
+- Done!
 
 ###Example:
 
