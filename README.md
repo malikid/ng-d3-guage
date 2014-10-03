@@ -10,12 +10,10 @@ d3 guage bower package.
 ```
 bower install ng-d3-guage
 ```
-
 2. Set the directive anywhere you want.
 ```
 ng-d3-guage(guage-option="guageOption")
 ```
-
 3. Set the option in your controller.
 ```
 $scope.guageOption =
@@ -41,9 +39,7 @@ $scope.guageOption =
     }
   ]
 ```
-
 4. Set the css.
-
 5. Done!
 
 ###Example:

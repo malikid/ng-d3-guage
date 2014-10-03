@@ -38,9 +38,9 @@ module.exports = (grunt) ->
       build:
         files: [
           expand: true
-          cwd: "src/"
+          cwd: "src/example/"
           src: "*.css"
-          dest: "dist/"
+          dest: "example/"
           filter: "isFile"
         ]
       example:

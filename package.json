@@ -16,6 +16,11 @@
     "grunt-contrib-jade": "^0.11.0",
     "grunt-string-replace": "~0.2.7"
   },
-  "keywords":["angularjs","datetime","schedule"],
+  "keywords": [
+    "d3",
+    "chart",
+    "pie chart",
+    "guage"
+  ],
   "licence":"MIT"
 }

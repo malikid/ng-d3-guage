@@ -14,8 +14,9 @@
   ],
   "license": "MIT",
   "main": [
-    "dist/d3Guage.css",
-    "dist/d3Guage.js"
+    "dist/d3Guage.js",
+    "dist/guageService.js",
+    "dist/needleFactory.js"
   ],
   "ignore": [
     "**/.*",
