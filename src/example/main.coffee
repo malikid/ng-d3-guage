@@ -2,6 +2,7 @@
   "use strict"
   app = ng.module("demo", ["d3Guage"])
   app.controller "demoCtrl", ($scope) ->
+    
     $scope.guageOption =
       startPercent: .75
       barWidth: 40

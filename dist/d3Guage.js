@@ -35,7 +35,10 @@
           }
           needle.construct(scope.guageOption.pointer);
           needle.drawOn(chart, 0);
-          return needle.animateOn(chart, scope.guageOption.pointer.percent);
+          needle.animateOn(chart, scope.guageOption.pointer.percent);
+          return scope.$watch("guageOption.pointer.percent", function(value) {
+            return needle.animateOn(chart, value);
+          });
         }
       };
     }
