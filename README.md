@@ -44,6 +44,7 @@ $scope.guageOption =
       percent: .25
       className: "chart-color3"
     }
+    ... # Add as many sections as you want.
   ]
 ```
 
