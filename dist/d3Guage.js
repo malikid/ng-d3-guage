@@ -6,7 +6,7 @@
         scope: {
           guageOption: "="
         },
-        template: "<div class=\"chart-gauge\"></div>",
+        template: "<div ng-show=\"guageOption.show\" class=\"chart-gauge\"></div>",
         link: function(scope, element, attrs) {
           var arc, arcEndRad, arcStartRad, chart, chartInset, el, endPadRad, height, margin, radius, section, sectionIndex, startPadRad, startPercent, svg, width, _i, _ref;
           chartInset = 10;

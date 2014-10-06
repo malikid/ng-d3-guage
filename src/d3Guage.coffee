@@ -12,6 +12,7 @@
 
         # === Example ===
         # guageOption =
+        #   show: true
         #   startPercent: .75
         #   barWidth: 40
         #   paddingRadius: .05

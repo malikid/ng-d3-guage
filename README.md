@@ -24,6 +24,7 @@ angular.module("demo", ["d3Guage"])
 - Set the option in your controller.
 ```
 $scope.guageOption =
+  show: true
   startPercent: .75
   barWidth: 40
   paddingRadius: .05
@@ -44,7 +45,7 @@ $scope.guageOption =
       percent: .25
       className: "chart-color3"
     }
-    ... # Add as many sections as you want.
+    ... Add as many sections as you want.
   ]
 ```
 
