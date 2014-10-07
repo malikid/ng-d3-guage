@@ -80,7 +80,8 @@
         needle.drawOn chart, 0
         needle.animateOn chart, scope.guageOption.pointer.percent
 
-        scope.$watch "guageOption.pointer.percent", (value) ->
+        scope.$watch "guageOption.pointer.percent", (newValue, oldValue) ->
+          return if newValue is oldValue
           needle.animateOn chart, value
     }
   ]
