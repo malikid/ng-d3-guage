@@ -55,6 +55,6 @@ $scope.guageOption =
 
 - If you want to reset pointer to another percent, just directly set guageOption.pointer.percent to another value and the pointer will animate to the value.
 
-###Example:
+###Example
 
 ![alt tag](example.png)
