@@ -1,8 +1,28 @@
-d3 guage bower package.
+# d3 guage bower package.
 
-###Reference
+### Demo
 
-[Jake Trent's CodePen](http://codepen.io/jaketrent/pen/eloGk)
+[Example](http://malikid.github.io/ng-d3-guage/example/)  
+
+or
+
+1. Clone this repository.
+2. Go into directory, and type `grunt server` / `grunt example`.
+
+
+
+### Bower Package
+
+Name: **ng-d3-guage**  
+
+
+
+### Environment
+
+angular: ~1.2.18  
+d3: ~3.4.11  
+
+
 
 ###Usage
 
@@ -55,6 +75,16 @@ $scope.guageOption =
 
 - If you want to reset pointer to another percent, just directly set guageOption.pointer.percent to another value and the pointer will animate to the value.
 
+- If you want to reset sections to another percent, just directly set percent of any one of guageOption.sections to another value and trigger svg to reset.
+
 ###Example
 
 ![alt tag](example.png)
+
+
+
+###Reference
+
+[Jake Trent's CodePen](http://codepen.io/jaketrent/pen/eloGk)
+
+
