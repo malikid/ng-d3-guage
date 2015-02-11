@@ -2,8 +2,9 @@ html
 head
   title
   meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+  link(rel='stylesheet', href='theme.css')
   link(rel='stylesheet', href='main.css')
-  script(src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.js', type='text/javascript', charset='utf-8')
+  script(src="lib/angular/angular.min.js")
   script(src="lib/d3/d3.js")
   script(src='dist/d3Guage.js')
   script(src='dist/needleFactory.js')
@@ -11,4 +12,29 @@ head
   script(src='main.js')
 
 body(ng-app='demo', ng-controller='demoCtrl')
-  d3-guage(guage-option="guageOption")
+
+  header
+    h1 Guage Style Settings
+
+  .main.clearfix
+    .column
+      .item(ng-repeat="key in guageOptionKeys", ng-switch="isObject(data.guageOption[key])")
+        div(ng-switch-when="true")
+          h3 {{key}}
+          div(ng-repeat="(k, val) in data.guageOption[key]", ng-switch="isObject(val)")
+            div(ng-switch-when="true")
+              h4 {{k}}
+              div(ng-repeat="(kkk, vvv) in data.guageOption[key][k]")
+                label(for="styleHeight") {{kkk}}
+                input#styleHeight(type="text", ng-model="data.guageOption[key][k][kkk]")
+            div(ng-switch-when="false")
+              label(for="styleHeight") {{k}}
+              input#styleHeight(type="text", ng-model="data.guageOption[key][k]")
+        div(ng-switch-when="false")
+          label(for="styleHeight") {{key}}
+          input#styleHeight(type="text", ng-model="data.guageOption[key]")
+
+    .column
+      d3-guage(guage-option="data.guageOption")
+
+  
