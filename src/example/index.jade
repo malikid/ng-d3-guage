@@ -18,21 +18,21 @@ body(ng-app='demo', ng-controller='demoCtrl')
 
   .main.clearfix
     .column
-      .item(ng-repeat="key in guageOptionKeys", ng-switch="isObject(data.guageOption[key])")
+      .item(ng-repeat="tier1Key in guageOptionKeys", ng-switch="isObject(data.guageOption[tier1Key])")
         div(ng-switch-when="true")
-          h3 {{key}}
-          div(ng-repeat="(k, val) in data.guageOption[key]", ng-switch="isObject(val)")
+          h3 {{tier1Key}}
+          div(ng-repeat="(tier2Key, tier2Value) in data.guageOption[tier1Key]", ng-switch="isObject(tier2Value)")
             div(ng-switch-when="true")
-              h4 {{k}}
-              div(ng-repeat="(kkk, vvv) in data.guageOption[key][k]")
-                label(for="styleHeight") {{kkk}}
-                input#styleHeight(type="text", ng-model="data.guageOption[key][k][kkk]")
+              h4 {{tier2Key}}
+              div(ng-repeat="(tier3Key, tier3Value) in data.guageOption[tier1Key][tier2Key]")
+                label(for="styleHeight") {{tier3Key}}
+                input#styleHeight(type="text", ng-model="data.guageOption[tier1Key][tier2Key][tier3Key]")
             div(ng-switch-when="false")
-              label(for="styleHeight") {{k}}
-              input#styleHeight(type="text", ng-model="data.guageOption[key][k]")
+              label(for="styleHeight") {{tier2Key}}
+              input#styleHeight(type="text", ng-model="data.guageOption[tier1Key][tier2Key]")
         div(ng-switch-when="false")
-          label(for="styleHeight") {{key}}
-          input#styleHeight(type="text", ng-model="data.guageOption[key]")
+          label(for="styleHeight") {{tier1Key}}
+          input#styleHeight(type="text", ng-model="data.guageOption[tier1Key]")
 
     .column
       d3-guage(guage-option="data.guageOption")

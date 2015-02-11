@@ -37,7 +37,6 @@
           needle.drawOn(chart, 0);
           needle.animateOn(chart, scope.guageOption.pointer.percent);
           return scope.$watch("guageOption.pointer.percent", function(newValue, oldValue) {
-            console.log("newValue", newValue, "oldValue", oldValue);
             if (newValue === oldValue) {
               return;
             }
