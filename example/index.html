@@ -1,0 +1,48 @@
+
+<html></html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <link rel="stylesheet" href="theme.css"/>
+  <link rel="stylesheet" href="main.css"/>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/d3/d3.js"></script>
+  <script src="dist/d3Guage.js"></script>
+  <script src="dist/needleFactory.js"></script>
+  <script src="dist/guageService.js"></script>
+  <script src="main.js"></script>
+</head>
+<body ng-app="demo" ng-controller="demoCtrl">
+  <header>
+    <h1>Guage Style Settings</h1>
+  </header>
+  <div class="main clearfix">
+    <div class="column">
+      <div ng-repeat="tier1Key in guageOptionKeys" ng-switch="isObject(data.guageOption[tier1Key])" class="item">
+        <div ng-switch-when="true">
+          <h3>{{tier1Key}}</h3>
+          <div ng-repeat="(tier2Key, tier2Value) in data.guageOption[tier1Key]" ng-switch="isObject(tier2Value)">
+            <div ng-switch-when="true">
+              <h4>{{tier2Key}}</h4>
+              <div ng-repeat="(tier3Key, tier3Value) in data.guageOption[tier1Key][tier2Key]">
+                <label for="styleHeight">{{tier3Key}}</label>
+                <input id="styleHeight" type="text" ng-model="data.guageOption[tier1Key][tier2Key][tier3Key]"/>
+              </div>
+            </div>
+            <div ng-switch-when="false">
+              <label for="styleHeight">{{tier2Key}}</label>
+              <input id="styleHeight" type="text" ng-model="data.guageOption[tier1Key][tier2Key]"/>
+            </div>
+          </div>
+        </div>
+        <div ng-switch-when="false">
+          <label for="styleHeight">{{tier1Key}}</label>
+          <input id="styleHeight" type="text" ng-model="data.guageOption[tier1Key]"/>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <d3-guage guage-option="data.guageOption"></d3-guage>
+    </div>
+  </div>
+</body>
