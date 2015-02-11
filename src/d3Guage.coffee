@@ -51,34 +51,45 @@
         chart = svg.append('g')
             .attr('transform', "translate(#{(width + margin.left) / 2}, #{(height + margin.top) / 2})")
 
-        # Start radius
-        startPercent = scope.guageOption.startPercent
+        init = () ->
 
-        # build gauge bg
-        for sectionIndex in [0..scope.guageOption.sections.length-1]
+          chart.selectAll("*").remove()
 
-          section = scope.guageOption.sections[sectionIndex]
+          # Start radius
+          startPercent = scope.guageOption.startPercent
 
-          arcStartRad = guageService.percToRad startPercent
-          arcEndRad = arcStartRad + guageService.percToRad (section.percent / 2)
-          startPercent += section.percent / 2
+          # build gauge bg
+          for sectionIndex in [0..scope.guageOption.sections.length-1]
 
-          startPadRad = if sectionIndex is 0 then 0 else scope.guageOption.paddingRadius / 2
-          endPadRad = if sectionIndex is (scope.guageOption.sections.length - 1) then 0 else scope.guageOption.paddingRadius / 2
+            section = scope.guageOption.sections[sectionIndex]
 
-          arc = d3.svg.arc()
-            .outerRadius(radius - chartInset)
-            .innerRadius(radius - chartInset - scope.guageOption.barWidth)
-            .startAngle(arcStartRad + startPadRad)
-            .endAngle(arcEndRad - endPadRad)
+            arcStartRad = guageService.percToRad startPercent
+            arcEndRad = arcStartRad + guageService.percToRad (section.percent / 2)
+            startPercent += section.percent / 2
 
-          chart.append('path')
-            .attr('class', "arc #{section.className}")
-            .attr('d', arc)
+            startPadRad = if sectionIndex is 0 then 0 else scope.guageOption.paddingRadius / 2
+            endPadRad = if sectionIndex is (scope.guageOption.sections.length - 1) then 0 else scope.guageOption.paddingRadius / 2
 
-        needle.construct scope.guageOption.pointer
-        needle.drawOn chart, 0
-        needle.animateOn chart, scope.guageOption.pointer.percent
+            arc = d3.svg.arc()
+              .outerRadius(radius - chartInset)
+              .innerRadius(radius - chartInset - scope.guageOption.barWidth)
+              .startAngle(arcStartRad + startPadRad)
+              .endAngle(arcEndRad - endPadRad)
+
+            chart.append('path')
+              .attr('class', "arc #{section.className}")
+              .attr('d', arc)
+
+          needle.construct scope.guageOption.pointer
+          needle.drawOn chart, 0
+          needle.animateOn chart, scope.guageOption.pointer.percent
+
+        init()
+
+        scope.$watch "guageOption.sections", (newValue, oldValue) ->
+          return if angular.equals newValue, oldValue
+          init()
+        , true
 
         scope.$watch "guageOption.pointer.percent", (newValue, oldValue) ->
           return if newValue is oldValue
