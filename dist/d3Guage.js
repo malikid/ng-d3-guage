@@ -1,6 +1,6 @@
 (function() {
   angular.module("d3Guage", []).directive("d3Guage", [
-    "$document", "needle", "guageService", function($document, needle, guageService) {
+    "$document", "$timeout", "needle", "guageService", function($document, $timeout, needle, guageService) {
       return {
         restrict: "E",
         scope: {
@@ -8,20 +8,10 @@
         },
         template: "<div ng-show=\"guageOption.show\" class=\"chart-gauge\"></div>",
         link: function(scope, element, attrs) {
-          var chart, chartInset, el, height, init, margin, radius, svg, width;
+          var chart, chartInset, init, radius;
           chartInset = 10;
-          el = d3.select('.chart-gauge');
-          margin = {
-            top: 20,
-            right: 20,
-            bottom: 30,
-            left: 20
-          };
-          width = el[0][0].offsetWidth - margin.left - margin.right;
-          height = width;
-          radius = Math.min(width, height) / 2;
-          svg = el.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
-          chart = svg.append('g').attr('transform', "translate(" + ((width + margin.left) / 2) + ", " + ((height + margin.top) / 2) + ")");
+          chart = null;
+          radius = null;
           init = function() {
             var arc, arcEndRad, arcStartRad, endPadRad, section, sectionIndex, startPadRad, startPercent, _i, _ref;
             chart.selectAll("*").remove();
@@ -40,7 +30,22 @@
             needle.drawOn(chart, 0);
             return needle.animateOn(chart, scope.guageOption.pointer.percent);
           };
-          init();
+          $timeout(function() {
+            var el, height, margin, svg, width;
+            el = d3.select('.chart-gauge');
+            margin = {
+              top: 20,
+              right: 20,
+              bottom: 30,
+              left: 20
+            };
+            width = el[0][0].offsetWidth - margin.left - margin.right;
+            height = width;
+            radius = Math.min(width, height) / 2;
+            svg = el.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
+            chart = svg.append('g').attr('transform', "translate(" + ((width + margin.left) / 2) + ", " + ((height + margin.top) / 2) + ")");
+            return init();
+          }, 0);
           scope.$watch("guageOption.sections", function(newValue, oldValue) {
             if (angular.equals(newValue, oldValue)) {
               return;
