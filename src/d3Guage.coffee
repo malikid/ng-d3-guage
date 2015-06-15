@@ -1,5 +1,5 @@
 # ( ->
-  angular.module("d3Guage", []).directive "d3Guage", ["$document", "needle", "guageService", ($document, needle, guageService) ->
+  angular.module("d3Guage", []).directive "d3Guage", ["$document", "$timeout", "needle", "guageService", ($document, $timeout, needle, guageService) ->
 
     return {
       restrict: "E"
@@ -36,20 +36,8 @@
         #   ]
 
         chartInset = 10
-        
-        el = d3.select('.chart-gauge')
-
-        margin = { top: 20, right: 20, bottom: 30, left: 20 }
-        width = el[0][0].offsetWidth - margin.left - margin.right
-        height = width
-        radius = Math.min(width, height) / 2
-
-        svg = el.append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-
-        chart = svg.append('g')
-            .attr('transform', "translate(#{(width + margin.left) / 2}, #{(height + margin.top) / 2})")
+        chart = null
+        radius = null
 
         init = () ->
 
@@ -84,7 +72,24 @@
           needle.drawOn chart, 0
           needle.animateOn chart, scope.guageOption.pointer.percent
 
-        init()
+        $timeout () ->
+          el = d3.select('.chart-gauge')
+
+          margin = { top: 20, right: 20, bottom: 30, left: 20 }
+          width = el[0][0].offsetWidth - margin.left - margin.right
+          height = width
+          radius = Math.min(width, height) / 2
+
+          svg = el.append('svg')
+              .attr('width', width + margin.left + margin.right)
+              .attr('height', height + margin.top + margin.bottom)
+
+          chart = svg.append('g')
+              .attr('transform', "translate(#{(width + margin.left) / 2}, #{(height + margin.top) / 2})")
+
+          init()
+
+        , 0
 
         scope.$watch "guageOption.sections", (newValue, oldValue) ->
           return if angular.equals newValue, oldValue
